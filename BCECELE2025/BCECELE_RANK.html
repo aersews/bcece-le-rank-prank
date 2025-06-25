@@ -19,6 +19,7 @@
 
 		var HintClass = "hintTextbox";
 		var HintActiveClass = "text";
+		var originalFormHTML = "";
 
 		// define a custom method on the string class to trim leading and training spaces
 		String.prototype.trim = function () { return this.replace(/^\s+|\s+$/g, ''); };
@@ -81,12 +82,18 @@
 				errorDiv.innerText = "";
 			}
 		}
+		function resetForm() {
+			var rollDataDiv = document.getElementById("roll_Data");
+			rollDataDiv.innerHTML = originalFormHTML;
+			initHintTextboxes(); // Reinitialize hint input behavior
+		}
+
 
 		function handleShowRank() {
 			var rollInput = document.getElementById("rolls");
 			var rollValue = rollInput.value.trim();
 			if (!validateRollNumber(rollValue)) {
-				showError("Roll number must be exactly 8 digits starting with '11'.");
+				showError("Invalid Roll no.");
 				document.getElementById("button1").disabled = false;
 				return;
 			}
@@ -99,7 +106,13 @@
 			setTimeout(function () {
 				document.getElementById("showLoad").style.display = "none"; // Hide the "Please wait..." message
 				var rollDataDiv = document.getElementById("roll_Data");
-				rollDataDiv.innerHTML = "<span style='font-size:20px; font-weight:bold; color: red;'>You are not qualified</span>";
+				rollDataDiv.innerHTML = `
+					<span style='font-size:20px; font-weight:bold; color: red;'>You are not qualified</span><br><br>
+					<input class="button" type="button" value="Check Again" onclick="resetForm();">
+					<br>
+					<br>
+				`;
+
 			}, 3000);
 
 			// Proceed with existing showUser function call
@@ -164,7 +177,8 @@
 </head>
 
 <body
-	onload="tabSwitch(document.getElementById('roll'));initHintTextboxes();document.getElementById('showLoad').style.display='none';">
+	onload="tabSwitch(document.getElementById('roll'));initHintTextboxes();document.getElementById('showLoad').style.display='none'; originalFormHTML = document.getElementById('roll_Data').innerHTML;">
+
 
 	<div id="wrapper">
 		<div id="header">
@@ -182,11 +196,12 @@
 							Date
 							of Birth </span><br>
 						<br>
-						<br>
 
 						<label class="name"><b>BCECE (LE) ID:</b> </label>
 						  <input size="25" id="rolls" name="rolls" type="text" value="e.g. 1234567890000"
-							class="hintTextbox" maxlength="13"><br>
+							class="hintTextbox" maxlength="13">
+						<br>
+						<br>
 						<label class="dob"><b>Date of Birth: </b></label>  
 						<select size="1" name="dd" id="dd" style="height:25px;">
 							<option value="01">01</option>
@@ -320,12 +335,16 @@
 						                       <input class="button" type="button" id="button1" value="Show Rank"
 							onclick="handleShowRank();">
 						<br>
+						<br>
 					</div>
 
 					<div class="tgl" id="result_Data">
-
+						<br>
 						<div id="showResult"></div>
+						<br>
 					</div>
+					<br>
+					<br>
 				</div>
 				<!-- end tabs -->
 
