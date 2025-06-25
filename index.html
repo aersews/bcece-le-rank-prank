@@ -304,13 +304,13 @@
 																<li><a href="https://bceceboard.bihar.gov.in/pdf_Seat/DC_PE2025_SM.pdf"
 																		id="a77" target="_blank">Seat Matrix of
 																		DCECE[PE]-2025 </a></li>
-																<li><a href="https://bceceboard.bihar.gov.in/DCECE2025_RANKCARD.html"
+																<li><a href="https://bceceboard.bihar.gov.in/DCECE2025_RANKCARD"
 																		target="_blank">Rank Card of
 																		DCECE[PE/PM/PMM]-2025 </a></li>
 																<li><a href="https://bceceboard.bihar.gov.in/pdf_Web/BIHTA_CIPET_FSTRU.pdf"
 																		id="a77" target="_blank">CIPET: BIHTA Fee
 																		Structure for UGEAC-2024 </a></li>
-																<li><a href="https://bceceboard.bihar.gov.in/UGEAC_2025Rank.html"
+																<li><a href="https://bceceboard.bihar.gov.in/UGEAC2025_RANK/UGEAC_2025Rank.php"
 																		target="_blank">Rank
 																		Card of UGEAC-2025 </a></li>
 																<li><a href="https://bceceboard.bihar.gov.in/pdf_Seat/UGEAC2025_SM.pdf"
@@ -1300,6 +1300,18 @@
 			</tr>
 		</table>
 	</div>
+
+	<!-- Open links in same tab -->
+	<script>
+		window.onload = function () {
+			const links = document.querySelectorAll('a');
+			links.forEach(link => {
+				link.removeAttribute('target');
+				link.onclick = null; // Optional: disable JS popups
+			});
+		};
+	</script>
+
 
 </body>
 
