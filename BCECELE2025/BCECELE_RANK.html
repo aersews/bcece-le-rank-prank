@@ -417,22 +417,35 @@
 
 	<!-- Popup HTML -->
 	<div id="popupOverlay"
-		style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+		style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 9999;">
 		<div id="popupBox"
-			style="background-color: #fff3cd; color: #856404; padding: 30px; border-radius: 10px; border: 1px solid #ffeeba; max-width: 600px; width: 90%; font-family: Arial, sans-serif; position: relative; text-align: center;">
+			style="background: #fff; color: #333; padding: 25px 20px; border-radius: 12px; border: 1px solid #ddd; max-width: 90%; width: 600px; font-family: 'Segoe UI', sans-serif; box-shadow: 0 5px 15px rgba(0,0,0,0.2); position: relative; text-align: left;"
+			onclick="event.stopPropagation();">
 			<span id="popupClose"
-				style="position: absolute; top: 10px; right: 15px; font-size: 20px; font-weight: bold; color: #856404; cursor: pointer;">&times;</span>
-			<h2 style="color: #d9534f; margin-top: 0;">⚠️ Please Read — This Was a Prank ⚠️</h2>
-			<p style="font-size: 17px; line-height: 1.6;">
+				style="position: absolute; top: 10px; right: 15px; font-size: 24px; font-weight: bold; color: #666; cursor: pointer; transition: color 0.3s;"
+				onmouseover="this.style.color='#000'" onmouseout="this.style.color='#666'">&times;</span>
+			<h2 style="color: #d9534f; margin-top: 0; font-size: 22px;">⚠️ Please Read — This Was a Prank ⚠️</h2>
+			<p style="font-size: 16px; line-height: 1.6; margin: 15px 0;">
 				Hey everyone,<br><br>
-				I want to sincerely apologize. This website was originally made as a light-hearted prank for a small
-				group of friends. I never imagined it would spread this far or gain so much attention.<br><br>
-				The prank was created by <strong>@aersews</strong>, and I truly didn’t expect it to blow up like this.
-				If this caused any confusion, stress, or disappointment — I am genuinely sorry.<br><br>
-				Please know that this was never meant to mislead or harm anyone. I understand now how big this has
-				become, and I take full responsibility.<br><br>
-				Real results are coming soon. I truly hope everyone gets the rank they’ve worked hard for. Thank you for
-				understanding — and again, I’m sorry for all the chaos this may have caused.
+				I want to sincerely apologize. This website was originally created as a light-hearted prank for a small
+				group of friends. I never expected it to spread so widely or attract so much attention.<br><br>
+				The prank was created by <strong>@aersews</strong>. If this caused any confusion, stress, or
+				disappointment — I am genuinely sorry.<br><br>
+				This was never intended to mislead or hurt anyone. I now realize how far this reached, and I take full
+				responsibility.<br><br>
+				Real results are on their way soon. I truly hope everyone gets the rank they worked so hard for. Thank
+				you for your understanding — and once again, I'm sorry for any inconvenience caused.
+			</p>
+
+			<hr style="margin: 25px 0; border: none; border-top: 1px solid #ccc;">
+
+			<p style="font-size: 16px; line-height: 1.6; margin: 15px 0;">
+				💡 By the way, if you're looking to improve your English for free, I’ve created a mobile app called
+				<strong>Langwizz</strong> — it's designed to help you learn English in a fun and easy way.<br><br>
+				You can also join our Telegram English-speaking group where we learn and have fun together:<br><br>
+				👉 <a href="https://t.me/english_practice_by_langwizz" target="_blank"
+					style="color: #007bff; text-decoration: none;">Join the Langwizz Telegram Group</a><br><br>
+				The app download link is available in the Telegram group as well!
 			</p>
 		</div>
 	</div>
@@ -441,19 +454,18 @@
 	<script>
 		window.onload = function () {
 			const closeBtn = document.getElementById("popupClose");
-			const popup = document.getElementById("popupOverlay");
+			const popupOverlay = document.getElementById("popupOverlay");
 
 			closeBtn.onclick = function () {
-				popup.style.display = "none";
+				popupOverlay.style.display = "none";
 			};
 
-			popup.onclick = function (event) {
-				if (event.target === popup) {
-					popup.style.display = "none";
-				}
+			popupOverlay.onclick = function () {
+				popupOverlay.style.display = "none";
 			};
 		};
 	</script>
+
 
 </body>
 
